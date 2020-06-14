@@ -31,7 +31,7 @@ module.exports = {
     },
     devtool: isDev ? 'source-map' : false,
     devServer: {
-        port: 3000,
+        port: 3001,
         hot: isDev
     },
     plugins: [
@@ -63,6 +63,7 @@ module.exports = {
                     {
                         loader: MiniCssExtractPlugin.loader,
                         options: {
+
                             hmr: isDev,
                             reloadAll: true
                         }
