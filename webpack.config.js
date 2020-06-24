@@ -10,14 +10,28 @@ const isDev = !isProd
 console.log('IS PROD', isProd)
 console.log('IS DEV', isDev)
 
-const filename = ext => isDev ? `bundle.${ext}`: `bundle.[hash].${ext}`
+const filename = ext => isDev ? `bundle.${ext}` : `bundle.[hash].${ext}`
 
-
+const jsLoaders = () => {
+    const loaders = [
+        {
+            loader: 'babel-loader',
+            options: {
+                presets: ['@babel/preset-env'],
+                plugins: [
+                    "@babel/plugin-proposal-class-properties",
+                    "@babel/plugin-syntax-class-properties"
+                ],
+            }
+        }
+    ]
+    return loaders;
+}
 
 module.exports = {
     context: path.resolve(__dirname, 'src'),
     mode: 'development',
-    entry: ['@babel/polyfill','./index.js'],
+    entry: ['@babel/polyfill', './index.js'],
     output: {
         filename: filename('js'),
         path: path.resolve(__dirname, 'dist')
@@ -74,14 +88,8 @@ module.exports = {
             },
             {
                 test: /\.js$/,
-                exclude: /node_moles/,
-
-                loader: {
-                    loader: 'babel-loader',
-                    options: {
-                        presets: ['@babel/preset-env']
-                    }
-                }
+                exclude: /node_modules/,
+                use: jsLoaders(),
             }
         ],
     }
