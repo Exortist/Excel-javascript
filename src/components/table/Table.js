@@ -1,12 +1,17 @@
-import {ExcelComponent} from "@core/ExcelComponent";
-import {createTable} from "@/components/table/table.template";
-import {$} from "@core/dom";
-import {resizeHandler} from "@/components/table/table.resize";
-import {isCell, matrix, nextSelector, shouldResize} from "@/components/table/table.functions";
-import {TableSelection} from "@/components/table/TableSelection";
-import * as actions from "@/redux/actions"
-import {defaultStyles} from "@/constants";
-import {parse} from "@core/parse";
+import {ExcelComponent} from '@core/ExcelComponent';
+import {createTable} from '@/components/table/table.template';
+import {$} from '@core/dom';
+import {resizeHandler} from '@/components/table/table.resize';
+import {
+    isCell,
+    matrix,
+    nextSelector,
+    shouldResize
+} from '@/components/table/table.functions';
+import {TableSelection} from '@/components/table/TableSelection';
+import * as actions from '@/redux/actions'
+import {defaultStyles} from '@/constants';
+import {parse} from '@core/parse';
 
 export class Table extends ExcelComponent {
     static className = 'excel__table'
@@ -47,15 +52,13 @@ export class Table extends ExcelComponent {
                 ids: this.selection.selectedIds
             }))
         })
-
     }
 
     selectCell($cell) {
         this.selection.select($cell)
         this.$emit('table:select', $cell)
-const styles = $cell.getStyles(Object.keys(defaultStyles))
+        const styles = $cell.getStyles(Object.keys(defaultStyles))
         this.$dispatch(actions.changeStyles(styles))
-
     }
 
     async resizeTable(event) {
@@ -63,7 +66,7 @@ const styles = $cell.getStyles(Object.keys(defaultStyles))
             const data = await resizeHandler(this.$root, event)
             this.$dispatch(actions.tableResize(data))
         } catch (e) {
-            console.error("Resize error", e.message)
+            console.error('Resize error', e.message)
         }
     }
 
@@ -73,16 +76,16 @@ const styles = $cell.getStyles(Object.keys(defaultStyles))
         } else if (isCell(event)) {
             const $target = $(event.target)
             if (event.shiftKey) {
-                //group
-                const $cells = matrix($target, this.selection.current).map(id => this.$root.find(`[data-id="${id}"]`))
+                // group
+                const $cells = matrix($target, this.selection.current)
+                    .map(id => this.$root
+                        .find(`[data-id="${id}"]`))
 
 
                 this.selection.selectGroup($cells)
-
             } else {
                 this.selectCell($target)
             }
-
         }
     }
 

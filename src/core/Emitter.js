@@ -7,16 +7,17 @@ export class Emitter {
     // Уведомляем слушателей если они есть
 
     emit(event, ...args) {
-        if (!Array.isArray(this.listeners[event]))
+        if (!Array.isArray(this.listeners[event])) {
             return false
+        }
         this.listeners[event].forEach(listener => {
             listener(...args)
         })
-        return  true
+        return true
     }
 
     // on, listen
-    //Подписываемся на уведомление
+    // Подписываемся на уведомление
     subscribe(event, fn) {
         this.listeners[event] = this.listeners[event] || []
         this.listeners[event].push(fn)

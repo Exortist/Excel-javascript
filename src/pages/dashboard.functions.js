@@ -1,4 +1,4 @@
-import {storage} from "@core/utils";
+import {storage} from '@core/utils';
 
 function toHTML(key) {
     const model = storage(key)
@@ -6,7 +6,10 @@ function toHTML(key) {
     return `
             <li class="db__record">
                 <a href="#excel/${id}">${model.title}</a>
-                <strong>${new Date(model.openedDate).toLocaleDateString()}${new Date(model.openedDate).toLocaleTimeString()}</strong></li>  `
+                <strong>
+                    ${new Date(model.openedDate).toLocaleDateString()}
+                    ${new Date(model.openedDate).toLocaleTimeString()}
+                </strong></li>`
 }
 
 function getAllKeys() {
@@ -37,5 +40,4 @@ export function createRecordsTable() {
             <ul class="db__list">
                 ${keys.map(toHTML).join('')}
             </ul>`
-
 }

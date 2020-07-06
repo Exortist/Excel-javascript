@@ -1,5 +1,5 @@
 // Pure functions
-import {defaultStyles} from "@/constants";
+import {defaultStyles} from '@/constants';
 
 export function capitalize(string) {
     if (typeof string !== 'string') {
@@ -43,9 +43,10 @@ export function toInlineStyles(styles = {}) {
 
 export function debounce(fn, wait) {
     let timeout
-    return function (...args) {
+    return function(...args) {
         const later = () => {
             clearTimeout(timeout)
+            // eslint-disable-next-line no-invalid-this
             fn.apply(this, args)
         }
         clearTimeout(timeout)
@@ -54,9 +55,9 @@ export function debounce(fn, wait) {
 }
 
 export function clone(obj) {
-return JSON.parse(JSON.stringify(obj))
+    return JSON.parse(JSON.stringify(obj))
 }
 
 export function preventDefault(event) {
-event.preventDefault()
+    event.preventDefault()
 }
