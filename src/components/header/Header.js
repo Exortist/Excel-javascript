@@ -1,9 +1,9 @@
-import {ExcelComponent} from "@core/ExcelComponent";
-import {changeTitle} from "@/redux/actions";
-import {$} from "@core/dom";
-import {defaultTitle} from "@/constants";
-import {debounce} from "@core/utils";
-import {ActiveRoute} from "@core/routes/ActiveRoute";
+import {ExcelComponent} from '@core/ExcelComponent';
+import {changeTitle} from '@/redux/actions';
+import {$} from '@core/dom';
+import {defaultTitle} from '@/constants';
+import {debounce} from '@core/utils';
+import {ActiveRoute} from '@core/routes/ActiveRoute';
 
 export class Header extends ExcelComponent {
     static className = 'excel__header'

@@ -4,7 +4,7 @@ export function parse(value = '') {
             return eval(value.slice(1))
         } catch (e) {
             console.warn('Skipping parse error', e.message)
-            //return value
+            // return value
         }
     }
     return value
